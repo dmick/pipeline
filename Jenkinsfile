@@ -1,9 +1,14 @@
 pipeline {
     agent any 
     stages {
-        stage('Stage 1') {
+        stage('x86') {
             steps {
-                echo 'Hello world!' 
+                echo "${env.BUILD_ID} x86"
+            }
+	}
+        stage('aarch64') {
+            steps {
+                echo "${env.JOB_NAME} aarch64"
             }
         }
     }
