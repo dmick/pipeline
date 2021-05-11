@@ -5,13 +5,13 @@ pipeline {
       parallel {
         stage('x86') {
           steps {
-            echo "${env.BUILD_ID} x86"
+            build job: 'ceph-grafana', parameters: [string(name: 'BRANCH', value: 'wip-grafana-container'), string(name: 'ARCH', value: 'x86_64')]
           }
         }
 
         stage('aarch64') {
           steps {
-            echo '"${env.JOB_NAME} aarch64"'
+            build job: 'ceph-grafana', parameters: [string(name: 'BRANCH', value: 'wip-grafana-container'), string(name: 'ARCH', value: 'arm64')]
           }
         }
 
