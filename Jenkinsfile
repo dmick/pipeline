@@ -1,5 +1,15 @@
 pipeline {
   agent any
+  options { 
+    skipDefaultCheckout()
+    timestamps()
+  }
+  parameters {
+    string(name: 'GRAFANA_VERSION', defaultValue: '6.7.4-1')
+    string(name: 'PIECHART_VERSION', defaultValue: '1.4.0')
+    string(name: 'STATUS_PANEL_VERSION', defaultValue: '1.0.9')
+  }
+
   stages {
     stage('x86') {
       parallel {
@@ -20,7 +30,7 @@ pipeline {
 
     stage('join') {
       steps {
-        echo "both builds done"
+        sh "sudo podman manifest create ceph-grafana:"
       }
     }
 
